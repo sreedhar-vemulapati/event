@@ -16,29 +16,36 @@ const Event = () => {
   const filteredEvents = filter === "All" ? events : events.filter(event => event.category === filter);
 
   return (
-    <div className="min-h-screen p-8 bg-gradient-to-r from-blue-50 to-blue-100 flex flex-col items-center">
-      <h2 className="text-4xl font-extrabold text-gray-800 mb-6">Event Listings</h2>
-      <div className="w-full max-w-3xl mb-6">
+    <div className="min-h-screen p-4 sm:p-8 bg-gradient-to-r from-blue-50 to-blue-100 flex flex-col items-center">
+      <h2 className="text-2xl sm:text-4xl font-extrabold text-gray-800 mb-4 sm:mb-6 text-center">Event Listings</h2>
+      
+      <div className="w-full max-w-3xl mb-4 sm:mb-6 flex flex-col sm:flex-row items-center justify-center gap-3">
         <label className="text-lg font-semibold">Filter by Category: </label>
-        <select onChange={(e) => setFilter(e.target.value)} className="ml-2 border p-2 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300">
+        <select 
+          onChange={(e) => setFilter(e.target.value)} 
+          className="border p-2 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300 w-full sm:w-auto"
+        >
           <option>All</option>
           <option>Religious</option>
           <option>Social</option>
           <option>Charity</option>
         </select>
       </div>
-      <ul className="w-full max-w-3xl">
+      
+      <ul className="w-full max-w-3xl grid grid-cols-1 sm:grid-cols-2 gap-4">
         {filteredEvents.map((event, index) => (
-          <li key={index} className="p-6 bg-white shadow-lg rounded-lg mb-4 border-l-4 border-blue-500">
-            <h3 className="text-2xl font-bold text-gray-900">{event.title}</h3>
+          <li key={index} className="p-4 sm:p-6 bg-white shadow-lg rounded-lg border-l-4 border-blue-500">
+            <h3 className="text-xl sm:text-2xl font-bold text-gray-900">{event.title}</h3>
             <p className="text-gray-600 mt-1">{event.date} - {event.location}</p>
             <p className="text-gray-700 mt-2">{event.description}</p>
           </li>
         ))}
       </ul>
-      <div className="w-full max-w-3xl mt-8 p-6 bg-white shadow-lg rounded-lg">
-        <h3 className="text-2xl font-bold text-gray-800 mb-4">Add New Event</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+      <div className="w-full max-w-3xl mt-6 sm:mt-8 p-4 sm:p-6 bg-white shadow-lg rounded-lg">
+        <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4">Add New Event</h3>
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <input className="border p-2 rounded-md shadow-sm" placeholder="Title" value={newEvent.title} onChange={(e) => setNewEvent({...newEvent, title: e.target.value})} />
           <input className="border p-2 rounded-md shadow-sm" type="date" value={newEvent.date} onChange={(e) => setNewEvent({...newEvent, date: e.target.value})} />
           <select className="border p-2 rounded-md shadow-sm" value={newEvent.category} onChange={(e) => setNewEvent({...newEvent, category: e.target.value})}>
